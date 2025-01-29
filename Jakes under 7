@@ -1,0 +1,105 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <variables>
+    <variable id="$W}_0h`PP:pG}kv(fRv?">Stake</variable>
+    <variable id="pfa9zKXcYlW2r_os!.{G">InitialStake</variable>
+    <variable id="lP)xhkL*aCx18HZcrT/t">TotalLost</variable>
+    <variable id="e|a}gZIo9#_0+He3d7hi">MartingaleSplit</variable>
+    <variable id="](Q;s|jd%Zw}ki;+K+?y">countLoss</variable>
+    <variable id="H3JkL*!a9$0sPqZt5yG@">TargetProfit</variable>
+  </variables>
+  <block type="trade_definition" id="vvq2|d,gUVX=EytWUeP_" deletable="false" x="0" y="0">
+    <statement name="TRADE_OPTIONS">
+      <!-- Existing trade definition blocks remain unchanged -->
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="cSFSGO8sY@pg_ONmuBhP">
+        <field name="VAR" id="$W}_0h`PP:pG}kv(fRv?">Stake</field>
+        <value name="VALUE">
+          <block type="math_number" id="Gccq(kL2,8V8hupM*r?r">
+            <field name="NUM">14</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id=".j;Zc-b;;fBCXsdRcP*r">
+            <field name="VAR" id="pfa9zKXcYlW2r_os!.{G">InitialStake</field>
+            <value name="VALUE">
+              <block type="math_number" id="|}/qb?S7zv||ylU29SHf">
+                <field name="NUM">14</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="IV/0uTjTQ(pZviAm;C%i">
+                <field name="VAR" id="e|a}gZIo9#_0+He3d7hi">MartingaleSplit</field>
+                <value name="VALUE">
+                  <block type="math_number" id="|jwp4sxJz1*r}g@OV13z">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="target_profit_init">
+                    <field name="VAR" id="H3JkL*!a9$0sPqZt5yG@">TargetProfit</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="target_num">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <!-- Existing SUBMARKET block remains unchanged -->
+  </block>
+  <!-- Modified AFTER_PURCHASE block -->
+  <block type="after_purchase" id="l)zL%u}zfr.hrUDIEHpM" x="714" y="96">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="_#.Wx[]qI%w[rK;Ltod-">
+        <!-- Existing win/loss logic remains unchanged -->
+        <next>
+          <block type="controls_if" id="ydJg|eh-@GWM!F(K4CA@">
+            <!-- Existing martingale logic remains unchanged -->
+            <next>
+              <block type="controls_if" id="ZdF69Y@SMCnt0J4!kp!b">
+                <!-- Existing minimum stake check remains unchanged -->
+                <next>
+                  <block type="controls_if" id="profit_check">
+                    <value name="IF0">
+                      <block type="logic_compare" id="profit_condition">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="variables_get" id="total_lost_var">
+                            <field name="VAR" id="lP)xhkL*aCx18HZcrT/t">TotalLost</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_single" id="neg_target">
+                            <field name="OP">NEG</field>
+                            <value name="NUM">
+                              <shadow type="math_number">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="variables_get" id="target_var">
+                                <field name="VAR" id="H3JkL*!a9$0sPqZt5yG@">TargetProfit</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="trade_again" id="conditional_trade"></block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <!-- Rest of the blocks remain unchanged -->
+</xml>
