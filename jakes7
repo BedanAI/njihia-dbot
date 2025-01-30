@@ -1,0 +1,85 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <variables>
+    <variable id="$W}_0h`PP:pG}kv(fRv?">Stake</variable>
+    <variable id="pfa9zKXcYlW2r_os!.{G">InitialStake</variable>
+    <variable id="lP)xhkL*aCx18HZcrT/t">TotalLost</variable>
+    <variable id="e|a}gZIo9#_0+He3d7hi">MartingaleSplit</variable>
+    <variable id="](Q;s|jd%Zw}ki;+K+?y">countLoss</variable>
+    <!-- New Variable for Target Profit -->
+    <variable id="targetProfitID">TargetProfit</variable>
+  </variables>
+  <block type="trade_definition" id="vvq2|d,gUVX=EytWUeP_" deletable="false" x="0" y="0">
+    <statement name="TRADE_OPTIONS">
+      <!-- Existing trade options here -->
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="cSFSGO8sY@pg_ONmuBhP">
+        <field name="VAR" id="$W}_0h`PP:pG}kv(fRv?">Stake</field>
+        <value name="VALUE">
+          <block type="math_number" id="Gccq(kL2,8V8hupM*r?r">
+            <field name="NUM">14</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id=".j;Zc-b;;fBCXsdRcP*r">
+            <field name="VAR" id="pfa9zKXcYlW2r_os!.{G">InitialStake</field>
+            <value name="VALUE">
+              <block type="math_number" id="|}/qb?S7zv||ylU29SHf">
+                <field name="NUM">14</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="IV/0uTjTQ(pZviAm;C%i">
+                <field name="VAR" id="e|a}gZIo9#_0+He3d7hi">MartingaleSplit</field>
+                <value name="VALUE">
+                  <block type="math_number" id="|jwp4sxJz1*r}g@OV13z">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+                <next>
+                  <!-- New initialization for target profit -->
+                  <block type="variables_set" id="initializeTargetProfit">
+                    <field name="VAR" id="targetProfitID">TargetProfit</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="initializeTargetProfitValue">
+                        <field name="NUM">100</field> <!-- Set your target profit value here -->
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <!-- Existing submarket trade options -->
+    </statement>
+  </block>
+
+  <!-- Other existing blocks -->
+
+  <block type="after_purchase" id="l)zL%u}zfr.hrUDIEHpM" x="714" y="96">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="_#.Wx[]qI%w[rK;Ltod-">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result" id="bl)23l#?d`y*$LZqBBm_">
+            <field name="CHECK_RESULT">loss</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <!-- Handle loss logic as usual -->
+        </statement>
+        <statement name="ELSE">
+          <block type="math_change" id="mQ,,uH$R_9@NYrOZ@9n.">
+            <field name="VAR" id="lP)xhkL*aCx18HZcrT/t">TotalLost</field>
+            <value name="DELTA">
+              <shadow type="math_number" id="Y0h=!G(RxgkwDTt1e#.[">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="math_single" id="@;SiFHF6fdsw@,~kP..$">
+                <field name="OP">NEG</field>
+                <value name="NUM">
+                  <shadow type="math_number" id=")z`EAzjoI[|cI}ik
